@@ -5,6 +5,7 @@ import ButtonComponent from '../components/Button'
 const WelcomeScreen = () => {
     return (
         <ImageBackground
+            blurRadius={10}
             style={styles.background}
             source={require('../assets/background.jpg')}
         >
