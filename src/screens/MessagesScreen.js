@@ -1,11 +1,11 @@
-import React from 'react'
-import { StyleSheet, Text, FlatList } from 'react-native'
+import { useState } from 'react'
+import { StyleSheet, FlatList } from 'react-native'
 import DeleteListItem from '../components/DeleteListItem'
 import ListItem from '../components/ListItem'
 import ListItemSeparator from '../components/ListItemSeparator'
 import Screen from '../components/Screen'
 
-const messages = [
+const initial = [
     {
         id: '1',
         title: 'Hello',
@@ -21,13 +21,15 @@ const messages = [
 ]
 
 const MessagesScreen = () => {
+    const [message, serMessage] = useState(initial)
+    const [refreshing, serRefreshing] = useState(false)
     const handelDelete = () => {
         console.log('deleted')
     }
     return (
         <Screen>
             <FlatList
-                data={messages}
+                data={message}
                 keyExtractor={(message) => message.id}
                 renderItem={({ item, index }) => (
                     <ListItem
@@ -41,6 +43,10 @@ const MessagesScreen = () => {
                     />
                 )}
                 ItemSeparatorComponent={ListItemSeparator}
+                refreshing={refreshing}
+                onRefresh={() => {
+                    serMessage([])
+                }}
             />
         </Screen>
     )
