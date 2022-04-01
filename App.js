@@ -5,7 +5,8 @@ import MessagesScreen from './src/screens/MessagesScreen'
 import MyAccountScreen from './src/screens/MyAccountScreen'
 import ViewImageScreen from './src/screens/ViewImageScreen'
 import WelcomeScreen from './src/screens/WelcomeScreen'
+import ListingScreen from './src/screens/ListingScreen'
 
 export default function App() {
-    return <MessagesScreen />
+    return <ListingScreen />
 }
