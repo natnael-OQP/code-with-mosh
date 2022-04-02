@@ -6,7 +6,8 @@ import MyAccountScreen from './src/screens/MyAccountScreen'
 import ViewImageScreen from './src/screens/ViewImageScreen'
 import WelcomeScreen from './src/screens/WelcomeScreen'
 import ListingScreen from './src/screens/ListingScreen'
+import RegisterScreen from './src/screens/registerScreen'
 
 export default function App() {
-    return <ListingScreen />
+    return <RegisterScreen />
 }
