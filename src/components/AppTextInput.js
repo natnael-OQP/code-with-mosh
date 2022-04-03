@@ -3,12 +3,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import colors from '../config/colors'
 
-const AppTextInput = ({ name, size = 20, placeholder, ...other }) => {
+const AppTextInput = ({ icon, size = 20, placeholder, ...other }) => {
     return (
         <View style={styles.textInputContainer}>
-            {name && (
+            {icon && (
                 <MaterialCommunityIcons
-                    name={name}
+                    name={icon}
                     size={size}
                     color={colors.medium}
                 />
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         backgroundColor: colors.light,
         borderRadius: 20,
-        marginTop: 10,
+        marginTop: 15,
     },
     textInput: {
         fontSize: 18,
