@@ -8,7 +8,8 @@ import WelcomeScreen from './src/screens/WelcomeScreen'
 import ListingScreen from './src/screens/ListingScreen'
 import RegisterScreen from './src/screens/registerScreen'
 import LoginScreen from './src/screens/LoginScreen'
+import ListingEditScreen from './src/screens/ListingEditScreen'
 
 export default function App() {
-    return <LoginScreen />
+    return <MessagesScreen />
 }
