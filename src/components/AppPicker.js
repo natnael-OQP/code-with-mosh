@@ -1,81 +1,95 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import {
-    StyleSheet,
-    Modal,
     View,
-    FlatList,
+    StyleSheet,
     TouchableWithoutFeedback,
+    Modal,
+    Button,
+    FlatList,
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import colors from '../config/colors'
 import AppText from './AppText'
+import Screen from './Screen'
 import PickerItem from './PickerItem'
+import colors from '../config/colors'
 
-const categories = [
-    { label: 'Furniture', value: 1 },
-    { label: 'Clothing', value: 2 },
-    { label: 'Camera', value: 3 },
-]
-
-const AppPicker = ({ name, size = 20 }) => {
-    const [open, setOpen] = useState(false)
-    const [placeholder, setPlaceholder] = useState(categories[0])
+function AppPicker({ icon, items, onSelectItem, placeholder, selectedItem }) {
+    const [modalVisible, setModalVisible] = useState(false)
 
     return (
         <>
-            <TouchableWithoutFeedback onPress={() => setOpen(!open)}>
-                <View style={styles.textInputContainer}>
-                    {name && (
+            <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
+                <View style={styles.container}>
+                    {icon && (
                         <MaterialCommunityIcons
-                            name={name}
-                            size={size}
+                            name={icon}
+                            size={20}
                             color={colors.medium}
+                            style={styles.icon}
                         />
                     )}
-                    <AppText style={styles.text}>
-                        {placeholder && placeholder.label}
-                    </AppText>
+                    {selectedItem ? (
+                        <AppText style={styles.text}>
+                            {selectedItem.label}
+                        </AppText>
+                    ) : (
+                        <AppText style={styles.placeholder}>
+                            {placeholder}
+                        </AppText>
+                    )}
+
                     <MaterialCommunityIcons
                         name="chevron-down"
-                        size={size}
+                        size={20}
                         color={colors.medium}
                     />
                 </View>
             </TouchableWithoutFeedback>
-            <Modal visible={open} animationType="slide">
-                <FlatList
-                    data={categories}
-                    keyExtractor={(item) => item.value}
-                    renderItem={({ item }) => (
-                        <PickerItem
-                            onPress={() => {
-                                setOpen(!open)
-                                setPlaceholder(item)
-                            }}
-                            label={item.label}
-                        />
-                    )}
-                />
+            <Modal visible={modalVisible} animationType="slide">
+                <Screen>
+                    <Button
+                        title="Close"
+                        onPress={() => setModalVisible(false)}
+                    />
+                    <FlatList
+                        data={items}
+                        keyExtractor={(item) => item.value.toString()}
+                        renderItem={({ item }) => (
+                            <PickerItem
+                                label={item.label}
+                                onPress={() => {
+                                    setModalVisible(false)
+                                    onSelectItem(item)
+                                }}
+                            />
+                        )}
+                    />
+                </Screen>
             </Modal>
         </>
     )
 }
 
-export default AppPicker
-
 const styles = StyleSheet.create({
-    textInputContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        width: '100%',
-        height: 40,
-        paddingHorizontal: 10,
+    container: {
         backgroundColor: colors.light,
-        borderRadius: 20,
+        borderRadius: 25,
+        flexDirection: 'row',
+        width: '100%',
+        padding: 15,
         marginVertical: 10,
     },
+    icon: {
+        marginRight: 10,
+    },
+    placeholder: {
+        color: colors.medium,
+        flex: 1,
+    },
     text: {
-        width: '100%',
+        flex: 1,
     },
 })
+
+export default AppPicker
