@@ -1,43 +1,54 @@
-import { useState } from 'react'
-import { StyleSheet, Image, View } from 'react-native'
+import { StyleSheet, Image } from 'react-native'
 
-import AppButton from '../components/AppButton'
-import AppTextInput from '../components/AppTextInput'
+// components
 import Screen from '../components/Screen'
+import AppFormInput from '../components/forms/AppFormInput'
+import AppFormButton from '../components/forms/AppFormButton'
+import AppForm from '../components/forms/AppForm'
+
+import * as yup from 'yup'
+
+const validationSchema = yup.object().shape({
+    email: yup.string().email().required().label('Email'),
+    password: yup.string().min(6).required().label('Password'),
+})
 
 const LoginScreen = () => {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
-
     return (
         <Screen style={styles.container}>
             <Image
                 style={styles.image}
                 source={require('../assets/logo-red.png')}
             />
-            <AppTextInput
-                name="email"
-                size={20}
-                placeholder="Email"
-                autoCapitalize="none"
-                autoCorrect={false}
-                keyboardType="email-address"
-                textContentType="emailAddress"
-                autoComplete="name"
-                onChangeText={(text) => setEmail(text)}
-            />
-            <AppTextInput
-                name="look"
-                size={20}
-                placeholder="Password"
-                autoCapitalize="none"
-                autoCorrect={false}
-                autoComplete="password"
-                textContentType="password"
-                secureTextEntry
-                onChangeText={(password) => setPassword(password)}
-            />
-            <AppButton title="Login" onPress={() => console.log('login')} />
+            <AppForm
+                initialValues={{ email: '', password: '' }}
+                onSubmit={(values) => console.log(values)}
+                validationSchema={validationSchema}
+            >
+                <AppFormInput
+                    icon="email"
+                    name="email"
+                    size={20}
+                    placeholder="Email"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="email-address"
+                    textContentType="emailAddress"
+                    autoComplete="name"
+                />
+                <AppFormInput
+                    icon="lock"
+                    name="password"
+                    size={20}
+                    placeholder="Password"
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    autoComplete="password"
+                    textContentType="password"
+                    secureTextEntry
+                />
+                <AppFormButton title="Login" />
+            </AppForm>
         </Screen>
     )
 }
