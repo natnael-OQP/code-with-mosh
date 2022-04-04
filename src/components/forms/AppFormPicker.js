@@ -2,6 +2,8 @@ import React from 'react'
 import { useFormikContext } from 'formik'
 
 import AppPicker from '../AppPicker'
+import AppText from '../AppText'
+import colors from '../../config/colors'
 
 function AppFormPicker({ items, name, width, placeholder }) {
     const { errors, setFieldValue, touched, values } = useFormikContext()
