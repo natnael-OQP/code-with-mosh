@@ -8,15 +8,10 @@ import {
 } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
-import { useFormikContext } from 'formik'
+import colors from '../config/colors'
 import * as ImagePicker from 'expo-image-picker'
 
-import colors from '../config/colors'
-import AppText from './AppText'
-
-const FormImage = ({ name, imagesUri, onChangeImage }) => {
-    const { touched, values, errors, setFieldValue } = useFormikContext()
-
+const FormImage = ({ imagesUri, onChangeImage }) => {
     useEffect(() => {
         const getPermissions = async () => {
             const { granted } =
@@ -35,7 +30,6 @@ const FormImage = ({ name, imagesUri, onChangeImage }) => {
                 })
             if (!cancelled) {
                 onChangeImage(uri)
-                // setFieldValue(name, imagesUri)
             }
         } catch (error) {
             console.log(error)
@@ -43,9 +37,9 @@ const FormImage = ({ name, imagesUri, onChangeImage }) => {
     }
 
     const HandelDelete = () => {
-        // web
+        //----- on web
         onChangeImage(imagesUri)
-        //    mobile
+        //----- on mobile
         // Alert.alert('Delete', 'Are you sure you want to delete this image?', [
         //     { text: 'Yes', onPress: () => onChangeImage(null) },
         //     { text: 'No' },
@@ -71,11 +65,6 @@ const FormImage = ({ name, imagesUri, onChangeImage }) => {
                             color={colors.medium}
                         />
                     )}
-                    {touched[name] && errors[name] && (
-                        <AppText fontSize={12} color={colors.danger}>
-                            {errors[name]}
-                        </AppText>
-                    )}
                 </View>
             </TouchableWithoutFeedback>
         </>
@@ -93,6 +82,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
+        marginRight: 10,
     },
     image: {
         width: '100%',
