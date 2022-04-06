@@ -8,10 +8,10 @@ import AppFormInput from '../components/forms/AppFormInput'
 import AppFormPicker from '../components/forms/AppFormPicker'
 import ImageList from '../components/ImageList'
 
-import Screen from '../components/Screen'
+import Screen from '../components/screen'
 
 const validationSchema = Yup.object().shape({
-    image: Yup.array().required().nullable().label('Image'),
+    image: Yup.array().min(1, 'Please Select at lest one image.'),
     title: Yup.string().required().min(1).label('Title'),
     price: Yup.number().required().min(1).label('Price'),
     description: Yup.string().label('Description'),
@@ -80,7 +80,7 @@ function ListingEditScreen() {
         <Screen style={styles.container}>
             <AppForm
                 initialValues={{
-                    image: '',
+                    image: [],
                     title: '',
                     price: '',
                     description: '',
