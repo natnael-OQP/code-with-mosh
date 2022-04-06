@@ -1,7 +1,7 @@
 import { StyleSheet, Image } from 'react-native'
 
 // components
-import Screen from '../components/Screen'
+import Screen from '../components/screen'
 import AppFormInput from '../components/forms/AppFormInput'
 import AppFormButton from '../components/forms/AppFormButton'
 import AppForm from '../components/forms/AppForm'

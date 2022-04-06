@@ -3,7 +3,7 @@ import { StyleSheet, FlatList } from 'react-native'
 import DeleteListItem from '../components/DeleteListItem'
 import ListItem from '../components/ListItem'
 import ListItemSeparator from '../components/ListItemSeparator'
-import Screen from '../components/Screen'
+import Screen from '../components/screen'
 
 const initial = [
     {

@@ -10,7 +10,7 @@ import {
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import AppText from './AppText'
-import Screen from './Screen'
+import Screen from './screen'
 import PickerItem from './PickerItem'
 import colors from '../config/colors'
 

@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { StyleSheet, Switch, View } from 'react-native'
 
 import AppTextInput from '../components/AppTextInput'
-import Screen from '../components/Screen'
+import Screen from '../components/screen'
 
 const RegisterScreen = () => {
     const [value, setValue] = useState(false)
