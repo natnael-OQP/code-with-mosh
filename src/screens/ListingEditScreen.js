@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import * as Yup from 'yup'
 import CategoryPickerItem from '../components/CategoryPickerItem'
@@ -9,6 +8,7 @@ import AppFormPicker from '../components/forms/AppFormPicker'
 import ImageList from '../components/ImageList'
 
 import Screen from '../components/screen'
+import UseLocation from '../hooks/useLocation'
 
 const validationSchema = Yup.object().shape({
     image: Yup.array().min(1, 'Please Select at lest one image.'),
@@ -76,6 +76,9 @@ const categories = [
 ]
 
 function ListingEditScreen() {
+    const { location, errorMsg } = UseLocation()
+    console.log(location, errorMsg)
+
     return (
         <Screen style={styles.container}>
             <AppForm
