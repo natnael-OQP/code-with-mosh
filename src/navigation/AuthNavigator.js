@@ -9,7 +9,7 @@ export default function AuthNavigator() {
     const Stack = createNativeStackNavigator()
 
     return (
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator>
             <Stack.Screen
                 name="Welcome"
                 component={WelcomeScreen}
