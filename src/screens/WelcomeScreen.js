@@ -1,8 +1,9 @@
+import { useNavigation } from '@react-navigation/native'
 import { StyleSheet, Image, Text, ImageBackground, View } from 'react-native'
 import AppButton from '../components/AppButton'
 import Screen from '../components/screen'
 
-const WelcomeScreen = () => {
+const WelcomeScreen = ({ navigation: { navigate } }) => {
     return (
         <Screen>
             <ImageBackground
@@ -18,8 +19,15 @@ const WelcomeScreen = () => {
                     <Text>Sell What You Don't Need</Text>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <AppButton title="login" />
-                    <AppButton title="register" color="secondary" />
+                    <AppButton
+                        title="login"
+                        onPress={() => navigate('Login')}
+                    />
+                    <AppButton
+                        title="register"
+                        color="secondary"
+                        onPress={() => navigate('Register')}
+                    />
                 </View>
             </ImageBackground>
         </Screen>
