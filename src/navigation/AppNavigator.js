@@ -4,8 +4,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 import colors from '../config/colors'
 import AccountScreen from '../screens/AccountScreen'
-import ListingScreen from '../screens/ListingScreen'
 import ListingEditScreen from '../screens/ListingEditScreen'
+import FeedNavigator from './FeedNavigator'
 
 export default function AppNavigator() {
     const Tab = createBottomTabNavigator()
@@ -16,23 +16,24 @@ export default function AppNavigator() {
             }}
         >
             <Tab.Screen
-                name="Listing"
+                name="Feed"
                 options={{
-                    tabBarLabel: 'Home',
+                    headerShown: false,
+                    tabBarLabel: 'Listing',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons
-                            name="home"
+                            name="plus"
                             color={color}
                             size={size}
                         />
                     ),
                 }}
-                component={ListingScreen}
+                component={FeedNavigator}
             />
             <Tab.Screen
                 name="ListingEdit"
                 options={{
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'ListingEdit',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons
                             name="home"
@@ -46,7 +47,7 @@ export default function AppNavigator() {
             <Tab.Screen
                 name="Account"
                 options={{
-                    tabBarLabel: 'Home',
+                    tabBarLabel: 'Account',
                     tabBarIcon: ({ color, size }) => (
                         <MaterialCommunityIcons
                             name="home"
