@@ -9,17 +9,19 @@ import ListItemSeparator from '../components/ListItemSeparator'
 const MenuItems = [
     {
         title: 'My Listings',
+        path: 'Listing',
         name: 'format-list-bulleted',
         backgroundColor: colors.primary,
     },
     {
         title: 'My Message',
+        path: 'Messages',
         name: 'email',
         backgroundColor: colors.secondary,
     },
 ]
 
-const AccountScreen = () => {
+const AccountScreen = ({ navigation: { navigate } }) => {
     return (
         <Screen style={styles.screen}>
             <ListItem
@@ -32,7 +34,7 @@ const AccountScreen = () => {
                     data={MenuItems}
                     keyExtractor={(item) => item.name}
                     renderItem={({
-                        item: { title, name, backgroundColor },
+                        item: { title, name, backgroundColor, path },
                     }) => (
                         <ListItem
                             title={title}
@@ -42,6 +44,7 @@ const AccountScreen = () => {
                                     backgroundColor={backgroundColor}
                                 />
                             }
+                            onPress={() => navigate(path)}
                         />
                     )}
                     ItemSeparatorComponent={ListItemSeparator}
