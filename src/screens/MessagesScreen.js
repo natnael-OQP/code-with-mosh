@@ -23,9 +23,7 @@ const initial = [
 const MessagesScreen = () => {
     const [message, serMessage] = useState(initial)
     const [refreshing, serRefreshing] = useState(false)
-    const handelDelete = () => {
-        console.log('deleted')
-    }
+    const handelDelete = () => {}
     return (
         <Screen>
             <FlatList

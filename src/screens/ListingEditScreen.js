@@ -77,7 +77,6 @@ const categories = [
 
 function ListingEditScreen() {
     const { location, errorMsg } = UseLocation()
-    console.log(location, errorMsg)
 
     return (
         <Screen style={styles.container}>
