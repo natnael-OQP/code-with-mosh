@@ -10,7 +10,7 @@ function Card({ title, subTitle, image, onPress }) {
                 <Image style={styles.image} source={image} />
                 <View style={styles.detailsContainer}>
                     <AppText style={styles.title}>{title}</AppText>
-                    <AppText style={styles.subTitle}>{subTitle}</AppText>
+                    <AppText style={styles.subTitle}>${subTitle}</AppText>
                 </View>
             </View>
         </TouchableWithoutFeedback>
