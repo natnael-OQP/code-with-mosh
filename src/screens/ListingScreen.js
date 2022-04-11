@@ -1,24 +1,21 @@
 import { StyleSheet, FlatList } from 'react-native'
+import { useState, useEffect } from 'react'
+
 import Card from '../components/Card'
 import Screen from '../components/screen'
 import colors from '../config/colors'
-
-const listings = [
-    {
-        id: '1',
-        title: 'Red jacket for sale',
-        subTitle: '$1000',
-        image: require('../assets/jacket.jpg'),
-    },
-    {
-        id: '2',
-        title: 'logo for sale',
-        subTitle: '$1000',
-        image: require('../assets/splash.png'),
-    },
-]
+import instance from '../api/fetch'
 
 const ListingScreen = ({ navigation }) => {
+    const [listings, setListings] = useState()
+
+    useEffect(() => {
+        const fetcher = async () => {
+            const { data } = await instance.get('listings')
+            setListings(data)
+        }
+        fetcher()
+    }, [])
     return (
         <Screen style={styles.screen}>
             <FlatList
@@ -30,8 +27,8 @@ const ListingScreen = ({ navigation }) => {
                             navigation.navigate('ListingDetails', item)
                         }
                         title={item?.title}
-                        subtitle={item?.subTitle}
-                        image={item?.image}
+                        subTitle={item?.price}
+                        image={item?.images[0].url}
                     />
                 )}
             />
