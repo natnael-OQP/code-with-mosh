@@ -12,13 +12,13 @@ const ImageList = () => {
     const scrollView = useRef()
 
     const AddImage = (uri) => {
-        setFieldValue('image', [...values.image, uri])
+        setFieldValue('images', [...values.images, uri])
     }
 
     const RemoveImage = (uri) => {
         setFieldValue(
-            'image',
-            values.image.filter((image) => image !== uri)
+            'images',
+            values.images.filter((image) => image !== uri)
         )
     }
 
@@ -30,7 +30,7 @@ const ImageList = () => {
                 onContentSizeChange={() => scrollView.current.scrollToEnd()}
             >
                 <View style={styles.container}>
-                    {values.image?.map((image, i) => (
+                    {values.images?.map((image, i) => (
                         <FormImage
                             key={i}
                             imagesUri={image}
@@ -39,13 +39,13 @@ const ImageList = () => {
                         />
                     ))}
                     <FormImage onChangeImage={AddImage} />
-                    {touched.image && errors.image && (
+                    {touched.images && errors.images && (
                         <AppText
                             style={styles.text}
                             fontSize={12}
                             color={colors.danger}
                         >
-                            {errors.image}
+                            {errors.images}
                         </AppText>
                     )}
                 </View>
