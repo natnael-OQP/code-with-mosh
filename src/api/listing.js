@@ -1,4 +1,6 @@
-const addListing = () => {
+import instance from './fetch'
+
+const addListing = (listing) => {
     const data = new FormData()
     data.append('title', listing.title)
     data.append('price', listing.price)
@@ -16,7 +18,7 @@ const addListing = () => {
     if (listing.location)
         data.append('location', JSON.stringify(listing.location))
 
-    return client.post(endpoint, data)
+    return instance.post('listings', data)
 }
 
 export default addListing
