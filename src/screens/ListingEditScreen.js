@@ -10,8 +10,10 @@ import ImageList from '../components/ImageList'
 import Screen from '../components/screen'
 import UseLocation from '../hooks/useLocation'
 
+import addListing from '../api/listing'
+
 const validationSchema = Yup.object().shape({
-    image: Yup.array().min(1, 'Please Select at lest one image.'),
+    images: Yup.array().min(1, 'Please Select at lest one image.'),
     title: Yup.string().required().min(1).label('Title'),
     price: Yup.number().required().min(1).label('Price'),
     description: Yup.string().label('Description'),
@@ -78,17 +80,27 @@ const categories = [
 function ListingEditScreen() {
     const { location, errorMsg } = UseLocation()
 
+    const handelSubmit = async (listing) => {
+        try {
+            console.log(listing)
+            await addListing({ ...listing, location })
+            alert('Success')
+        } catch (err) {
+            alert("Could't save the listing")
+        }
+    }
+
     return (
         <Screen style={styles.container}>
             <AppForm
                 initialValues={{
-                    image: [],
+                    images: [],
                     title: '',
                     price: '',
                     description: '',
                     category: null,
                 }}
-                onSubmit={(values) => console.log(values)}
+                onSubmit={handelSubmit}
                 validationSchema={validationSchema}
             >
                 <ImageList />
