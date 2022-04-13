@@ -6,13 +6,13 @@ import ListItem from '../components/ListItem'
 import colors from '../config/colors'
 
 function ListingDetailsScreen({ route: { params } }) {
-    const { images, title, subTitle } = params
+    const { images, title, price } = params
     return (
         <View>
             <Image style={styles.image} source={{ uri: images[0].url }} />
             <View style={styles.detailsContainer}>
                 <AppText style={styles.title}>{title}</AppText>
-                <AppText style={styles.price}>{subTitle}</AppText>
+                <AppText style={styles.price}>{price}</AppText>
                 <View style={styles.userContainer}>
                     <ListItem
                         image={require('../assets/mosh.jpg')}
