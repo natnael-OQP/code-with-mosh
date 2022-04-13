@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, ActivityIndicator } from 'react-native'
+import { StyleSheet, FlatList } from 'react-native'
 import { useState, useEffect } from 'react'
 
 import Card from '../components/Card'
@@ -6,29 +6,18 @@ import AppText from '../components/AppText'
 import AppButton from '../components/AppButton'
 import Screen from '../components/screen'
 import colors from '../config/colors'
-import instance from '../api/fetch'
+import ActivityIndicator from '../components/ActivityIndicator'
+import useApi from '../hooks/useApi'
 
 const ListingScreen = ({ navigation }) => {
-    const [listings, setListings] = useState()
-    const [error, setError] = useState(false)
-    const [loading, setLoading] = useState(false)
-
-    const fetcher = async () => {
-        try {
-            setLoading(true)
-            const { data } = await instance.get('listings')
-            setListings(data)
-            setLoading(false)
-
-            setError(false)
-        } catch (err) {
-            setError(true)
-        }
-    }
+    const { error, loading, listings, fetcher } = useApi()
 
     useEffect(() => {
-        fetcher()
+        fetcher('listings')
     }, [])
+
+    // not working for web
+    // if (loading) return <ActivityIndicator />
 
     return (
         <Screen style={styles.screen}>
@@ -38,9 +27,10 @@ const ListingScreen = ({ navigation }) => {
                     <AppButton title="retry" onPress={fetcher} />
                 </>
             )}
-            {loading && <ActivityIndicator size="large" />}
             <FlatList
                 data={listings}
+                refreshing={false}
+                onRefresh={() => fetcher()}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                     <Card
